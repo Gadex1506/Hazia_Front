@@ -12,17 +12,17 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./animal.component.css']
 })
 export class AnimalComponent {
-  titlePage: string = 'Animalitos';
+  titlePage: string = 'lideres';
   animalList: any = [];
   animalForm: any = this.formBuilder.group({
     nombre: '',
-    edad: 0,
-    tipo: '',
-    fecha: Date
+    correo: '',
+    clave: '',
+    cedula: '',
   })
   editableAnimal: boolean = false;
   idAnimal: any;
-  user = 'Usuario';
+  user = 'Administrador';
 
 
   constructor(private animalService: AnimalService,
@@ -33,12 +33,12 @@ export class AnimalComponent {
 
   }
   ngOnInit() {
-    this.getAllAnimals();
+    this.getAllLideres();
   }
 
 
-  getAllAnimals() {
-    this.animalService.getAllAnimalsData(localStorage.getItem('accessToken')).subscribe(
+  getAllLideres() {
+    this.animalService.getAllLideresData(localStorage.getItem('accessToken')).subscribe(
       (data: {}) => {
         this.animalList = data
       }
@@ -86,9 +86,8 @@ export class AnimalComponent {
       data => {
         this.animalForm.setValue({
           nombre: data.nombre,
-          edad: data.edad,
-          tipo: data.tipo,
-          fecha: this.getValidDate(data.fecha)
+          correo: data.correo,
+          cedula: data.cedula,
         });
       }
     );
@@ -134,7 +133,7 @@ export class AnimalComponent {
     this.animalService.deleteAnimal(localStorage.getItem('accessToken'), id).subscribe(
       () => {
         //Enviando mensaje de confirmación
-        this.newMessage("Animal eliminado");
+        this.newMessage("Lider de semillero eliminado");
       }
     );
   }

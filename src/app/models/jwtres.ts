@@ -5,6 +5,7 @@ export interface Jwtres {
     correo: string,
     clave: string,
     accessToken: string,
-    expiresIn: string
+    expiresIn: string,
+    rol: string,
   }
 }

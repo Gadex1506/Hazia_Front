@@ -22,8 +22,21 @@ export class LoginComponent {
   onLogin(form: any): void {
     this.authenticationService.login(form.value).subscribe(
       (res) => {
+
         localStorage.setItem('accessToken',JSON.parse(JSON.stringify(res)).accessToken);
-        this.router.navigateByUrl('/animal');
+        localStorage.setItem('rol', JSON.parse(JSON.stringify(res)).rol);
+
+        const rol = localStorage.getItem('rol');
+        
+        if (rol == '1') {
+          console.log('Rol de Admin');
+          this.router.navigateByUrl('/animal');
+        }else if (rol == '2') {
+          console.log('Rol de Lider');
+        }else if (rol == '3') {
+          console.log('Rol de Estudiante');
+        }
+        
       }
     );
   }

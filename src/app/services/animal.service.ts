@@ -7,11 +7,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class AnimalService {
-  apiUri = '/api/animals';
+  apiUri = '/api/lideres';
+  apiUriRegistro = '/api/registroLider';
+  apiUriEliminarL = '/api/eliminarLider';
 
   constructor(private http: HttpClient) { }
 
-  getAllAnimalsData(token: any): Observable<any> {
+  getAllLideresData(token: any): Observable<any> {
 
     return this.http.get(this.apiUri, {
       headers:
@@ -24,7 +26,7 @@ export class AnimalService {
 
   newAnimal(token: any, data: any): Observable<any> {
     return this.http.post<any>(
-      this.apiUri,
+      this.apiUriRegistro,
       data,
       {
         headers: {
@@ -54,9 +56,11 @@ export class AnimalService {
       } });
   }
 
+
+
   deleteAnimal(token: any, id: any) {
     return this.http.delete<any>(
-      this.apiUri + "/" + id,
+      this.apiUriEliminarL + '/' + id,
       { headers: {
         'Content-Type': 'application/json',
         accessToken: `${token}`

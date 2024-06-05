@@ -30,7 +30,7 @@
           <li class="nav-item dropdown no-arrow">
 
             <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{user}}</span>
-            <img class="img-profile rounded-circle" src="img/undraw_profile.svg">
+            <!--<img class="img-profile rounded-circle" src="img/undraw_profile.svg">-->
 
           </li>
 
@@ -53,13 +53,13 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/animal">Inicio</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Animales</li>
+                  <li class="breadcrumb-item active" aria-current="page">Lideres de Semilleros</li>
                 </ol>
               </nav>
               <div class="col-md-12 d-flex justify-content-center">
                 <div class="page-header">
                   <h1>
-                    <small>Animales</small>
+                    <small>Lista de Lideres de Semilleros</small>
                   </h1>
                 </div>
               </div>
@@ -70,7 +70,7 @@
                 <div class="">
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Registrar animal
+                    Registrar nuevo lider
                   </button>
                 </div>
                 <!--INICIA TABLA-->
@@ -79,9 +79,8 @@
                     <thead>
                       <tr>
                         <th scope="col">Nombre</th>
-                        <th scope="col">Edad</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Fecha</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Cédula</th>
                         <th scope="col">Editar</th>
                         <th scope="col">Eliminar</th>
                       </tr>
@@ -89,9 +88,8 @@
                     <tbody>
                       <tr *ngFor="let item of animalList">
                         <td>{{item.nombre}}</td>
-                        <td>{{item.edad}}</td>
-                        <td>{{item.tipo}}</td>
-                        <td>{{item.fecha}}</td>
+                        <td>{{item.correo}}</td>
+                        <td>{{item.cedula}}</td>
                         <td><button type="button" class="btn btn-primary" (click)="toggleEditAnimal(item._id)">
                             <i class="bi bi-pencil-square"></i>
                           </button></td>
@@ -109,14 +107,14 @@
                       placeholder="Nombre del animal" formControlName="nombre">
                   </div>
                   <div class="mb-3">
-                    <label for="edad" class="form-label">Edad</label>
-                    <input type="number" class="form-control" id="edad" placeholder="Edad animal"
+                    <label for="email" class="form-label">Correo</label>
+                    <input type="text" class="form-control" id="email" placeholder=""
                       formControlName="edad">
                   </div>
                   <div class="mb-3">
-                    <label for="tipo" class="form-label">Tipo</label>
-                    <input type="text" class="form-control" id="tipo" placeholder="Tipo de animal"
-                      formControlName="tipo">
+                    <label for="password" class="form-label">Clave</label>
+                    <input type="password" class="form-control" id="password" placeholder=""
+                      formControlName="password">
                   </div>
                   <div class="mb-3">
                     <label for="fecha" class="form-label">Fecha</label>
@@ -136,7 +134,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo animal</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Líder</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -144,21 +142,22 @@
                     <div class="mb-3">
                       <label for="nombre" class="form-label">Nombre</label>
                       <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"
-                        placeholder="Nombre del animal" formControlName="nombre">
+                        placeholder="Nombre del líder de semillero" formControlName="nombre">
                     </div>
                     <div class="mb-3">
-                      <label for="edad" class="form-label">Edad</label>
-                      <input type="number" class="form-control" id="edad" placeholder="Edad animal"
-                        formControlName="edad">
+                      <label for="nombre" class="form-label">Nombre</label>
+                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                        placeholder="example@konradlorenz.edu.co" formControlName="nombre">
                     </div>
                     <div class="mb-3">
-                      <label for="tipo" class="form-label">Tipo</label>
-                      <input type="text" class="form-control" id="tipo" placeholder="Tipo de animal"
-                        formControlName="tipo">
+                      <label for="nombre" class="form-label">Clave</label>
+                      <input type="password" class="form-control" id="password" aria-describedby="emailHelp"
+                        placeholder="Asigna una contraseña" formControlName="nombre">
                     </div>
                     <div class="mb-3">
-                      <label for="fecha" class="form-label">Fecha</label>
-                      <input type="date" class="form-control" id="fecha" placeholder="Fecha" formControlName="fecha">
+                      <label for="nombre" class="form-label">Cédula</label>
+                      <input type="text" class="form-control" id="cedula" aria-describedby="emailHelp"
+                        placeholder="Nombre del líder de semillero" formControlName="nombre">
                     </div>
                     <div class="input-group justify-content-center md-12">
                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>

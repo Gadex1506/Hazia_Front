@@ -6,7 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
-  title = 'Zoológico';
+  title = 'HAZIA';
   user = 'Usuario';
 }
 
