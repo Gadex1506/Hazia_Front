@@ -22,6 +22,10 @@ export class SignupComponent {
       (res) => {
         localStorage.setItem('accessToken', JSON.parse(JSON.stringify(res)).accessToken);
         this.router.navigateByUrl('/login');
+      },
+      (error) => {
+        console.error('Error during registration:', error);
+        // Maneja el error (por ejemplo, muestra un mensaje de error)
       }
     );
   }

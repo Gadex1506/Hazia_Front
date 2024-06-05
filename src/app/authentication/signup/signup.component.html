@@ -19,7 +19,7 @@
                 <form class="user" (ngSubmit)="onRegister(formLogin)" #formLogin="ngForm">
                   <div class="form-group">
                     <input type="text" class="form-control form-control-user" id="exampleInputUser"
-                      aria-describedby="emailHelp" placeholder="Usuario"  name="usuario" ngModel>
+                      aria-describedby="emailHelp" placeholder="Nombre"  name="nombre" ngModel>
                   </div>
                   <div class="form-group">
                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
@@ -29,10 +29,21 @@
                     <input type="password" class="form-control form-control-user" id="exampleInputPassword"
                       placeholder="Clave" name="clave" ngModel autocomplete="on">
                   </div>
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="exampleInputUser"
+                      aria-describedby="emailHelp" placeholder="Cédula"  name="cedula" ngModel>
+                  </div>
+                  
 
                   <button type="submit" class="btn btn-primary btn-user btn-block">
                     Iniciar sesión
                   </button>
+                  <br>
+                  <br>
+                  <div class="center-container">
+                    <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
+                    <hr>
+                  </div>
                 </form>
                 <hr>
 
