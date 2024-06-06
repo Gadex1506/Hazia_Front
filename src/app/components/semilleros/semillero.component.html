@@ -100,7 +100,7 @@
                   </table>
                 </div>
                 <!--TERMINA TABLA-->
-                <form *ngIf="editableAnimal" class="card p-2" (ngSubmit)="updateAnimalEntry()" [formGroup]="liderForm">
+                <form *ngIf="editableAnimal" class="card p-2" (ngSubmit)="updateAnimalEntry()" [formGroup]="semilleroForm">
                   <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"
@@ -133,7 +133,7 @@
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form class="card p-2" (ngSubmit)="newAnimalEntry()" [formGroup]="liderForm">
+                  <form class="card p-2" (ngSubmit)="newAnimalEntry()" [formGroup]="semilleroForm">
                     <div class="mb-3">
                       <label for="nombre" class="form-label">Nombre</label>
                       <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"

@@ -1,5 +1,5 @@
 import { FormBuilder } from '@angular/forms';
-import { LiderService } from './../../services/lider.service';
+import { SemilleroService } from '../../services/semillero.service';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -7,25 +7,28 @@ import { take } from 'rxjs';
 import { formatDate } from '@angular/common';
 
 @Component({
-  selector: 'app-animal',
-  templateUrl: './lider.component.html',
-  styleUrls: ['./lider.component.css']
+  selector: 'app-semilleros',
+  templateUrl: './semillero.component.html',
+  styleUrls: ['./semillero.component.css']
 })
-export class LiderComponent {
-  titlePage: string = 'lideres';
-  animalList: any = [];
-  liderForm: any = this.formBuilder.group({
-    nombre: '',
-    correo: '',
-    clave: '',
-    cedula: '',
+export class SemilleroComponent {
+  titlePage: string = 'Semilleritos';
+  semilleroList: any = [];
+  semilleroForm: any = this.formBuilder.group({
+    codigo: '',
+    liderSemillero: '',
+    nombreSemillero: '',
+    descripcion: '',
+    fechaCreacion: '',
+    facultad: '',
+    integrantes: [],
   })
-  editableAnimal: boolean = false;
-  idAnimal: any;
-  user = 'Lider de Semillero';
+  editableSemillero: boolean = false;
+  idSemillero: any;
+  user = 'Semilleros';
 
 
-  constructor(private animalService: LiderService,
+  constructor(private semilleroService: SemilleroService,
     private formBuilder: FormBuilder,
     private router: Router,
     private toastr: ToastrService) {
@@ -38,15 +41,15 @@ export class LiderComponent {
 
 
   getAllLideres() {
-    this.animalService.getAllLideresData(localStorage.getItem('accessToken')).subscribe(
+    this.semilleroService.getAllLideresData(localStorage.getItem('accessToken')).subscribe(
       (data: {}) => {
-        this.animalList = data
+        this.semilleroList = data
       }
     );
   }
 
   newAnimalEntry() {
-    this.animalService.newAnimal(localStorage.getItem('accessToken'), this.liderForm.value).subscribe(
+    this.semilleroService.newAnimal(localStorage.getItem('accessToken'), this.semilleroForm.value).subscribe(
       () => {
         //Redirigiendo a la ruta actual /animal y recargando la ventana
         this.router.navigate(['/animal']).then(() => {
@@ -66,12 +69,12 @@ export class LiderComponent {
 
   updateAnimalEntry() {
     //Removiendo valores vacios del formulario de actualización
-    for (let key in this.liderForm.value) {
-      if (this.liderForm.value[key] === '') {
-        this.liderForm.removeControl(key);
+    for (let key in this.semilleroForm.value) {
+      if (this.semilleroForm.value[key] === '') {
+        this.semilleroForm.removeControl(key);
       }
     }
-    this.animalService.updateAnimal(localStorage.getItem('accessToken'), this.idAnimal, this.liderForm.value).subscribe(
+    this.semilleroService.updateAnimal(localStorage.getItem('accessToken'), this.idSemillero, this.semilleroForm.value).subscribe(
       () => {
         //Enviando mensaje de confirmación
         this.newMessage("Animal editado");
@@ -80,11 +83,11 @@ export class LiderComponent {
   }
 
   toggleEditAnimal(id: any) {
-    this.idAnimal = id;
-    console.log(this.idAnimal)
-    this.animalService.getOneAnimal(localStorage.getItem('accessToken'), id).subscribe(
+    this.idSemillero = id;
+    console.log(this.idSemillero)
+    this.semilleroService.getOneAnimal(localStorage.getItem('accessToken'), id).subscribe(
       data => {
-        this.liderForm.setValue({
+        this.semilleroForm.setValue({
           nombre: data.nombre,
           correo: data.correo,
           clave: data.clave,
@@ -92,7 +95,7 @@ export class LiderComponent {
         });
       }
     );
-    this.editableAnimal = !this.editableAnimal;
+    this.editableSemillero = !this.editableSemillero;
   }
 
   getValidDate(fecha: Date) {
@@ -131,7 +134,7 @@ export class LiderComponent {
 
   deleteAnimalEntry(id: any) {
     console.log(id)
-    this.animalService.deleteAnimal(localStorage.getItem('accessToken'), id).subscribe(
+    this.semilleroService.deleteAnimal(localStorage.getItem('accessToken'), id).subscribe(
       () => {
         //Enviando mensaje de confirmación
         this.newMessage("Lider de semillero eliminado");
