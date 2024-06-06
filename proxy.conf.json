@@ -28,6 +28,25 @@
     "target": "http://localhost:3000",
     "secure": false,
     "changeOrigin": false
+  },
+  "/api/semilleros": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/api/registroSemillero": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/api/eliminarSemilleros": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": false
+  },
+  "/api/actualizarSemilleros": {
+    "target": "http://localhost:3000",
+    "secure": false,
+    "changeOrigin": false
   }
-  
 }

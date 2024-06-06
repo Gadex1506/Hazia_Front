@@ -12,14 +12,13 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./semillero.component.css']
 })
 export class SemilleroComponent {
-  titlePage: string = 'Semilleritos';
+  titlePage: string = 'semilleros';
   semilleroList: any = [];
   semilleroForm: any = this.formBuilder.group({
     codigo: '',
     liderSemillero: '',
     nombreSemillero: '',
     descripcion: '',
-    fechaCreacion: '',
     facultad: '',
     integrantes: [],
   })
@@ -36,23 +35,23 @@ export class SemilleroComponent {
 
   }
   ngOnInit() {
-    this.getAllLideres();
+    this.getAllSemilleros();
   }
 
 
-  getAllLideres() {
-    this.semilleroService.getAllLideresData(localStorage.getItem('accessToken')).subscribe(
+  getAllSemilleros() {
+    this.semilleroService.getAllSemillerosData(localStorage.getItem('accessToken')).subscribe(
       (data: {}) => {
         this.semilleroList = data
       }
     );
   }
 
-  newAnimalEntry() {
-    this.semilleroService.newAnimal(localStorage.getItem('accessToken'), this.semilleroForm.value).subscribe(
+  newSemilleroEntry() {
+    this.semilleroService.newSemillero(localStorage.getItem('accessToken'), this.semilleroForm.value).subscribe(
       () => {
-        //Redirigiendo a la ruta actual /animal y recargando la ventana
-        this.router.navigate(['/animal']).then(() => {
+        //Redirigiendo a la ruta actual /semillero y recargando la ventana
+        this.router.navigate(['/semillero']).then(() => {
           this.newMessage('Registro exitoso');
         })
       }
@@ -67,31 +66,35 @@ export class SemilleroComponent {
       .subscribe(() => window.location.reload());
   }
 
-  updateAnimalEntry() {
+  updateSemilleroEntry() {
     //Removiendo valores vacios del formulario de actualización
     for (let key in this.semilleroForm.value) {
       if (this.semilleroForm.value[key] === '') {
         this.semilleroForm.removeControl(key);
       }
     }
-    this.semilleroService.updateAnimal(localStorage.getItem('accessToken'), this.idSemillero, this.semilleroForm.value).subscribe(
+    this.semilleroService.updateSemillero(localStorage.getItem('accessToken'), this.idSemillero, this.semilleroForm.value).subscribe(
       () => {
-        //Enviando mensaje de confirmación
-        this.newMessage("Animal editado");
+        //Redirigiendo a la ruta actual /semillero y recargando la ventana
+        this.router.navigate(['/semillero']).then(() => {
+          this.newMessage('Semillero editado');
+        })
       }
     );
   }
 
-  toggleEditAnimal(id: any) {
+  toggleEditSemillero(id: any) {
     this.idSemillero = id;
     console.log(this.idSemillero)
-    this.semilleroService.getOneAnimal(localStorage.getItem('accessToken'), id).subscribe(
+    this.semilleroService.getOneSemillero(localStorage.getItem('accessToken'), id).subscribe(
       data => {
         this.semilleroForm.setValue({
-          nombre: data.nombre,
-          correo: data.correo,
-          clave: data.clave,
-          cedula: data.cedula,
+          codigo: data.codigo,
+          liderSemillero: data.liderSemillero,
+          nombreSemillero: data.nombreSemillero,
+          descripcion: data.descripcion,
+          facultad: data.facultad,
+          integrantes: [],
         });
       }
     );
@@ -132,12 +135,13 @@ export class SemilleroComponent {
     return finalDate;
   }
 
-  deleteAnimalEntry(id: any) {
+  deleteSemilleroEntry(id: any) {
     console.log(id)
-    this.semilleroService.deleteAnimal(localStorage.getItem('accessToken'), id).subscribe(
+    this.semilleroService.deleteSemillero(localStorage.getItem('accessToken'), id).subscribe(
       () => {
-        //Enviando mensaje de confirmación
-        this.newMessage("Lider de semillero eliminado");
+        this.router.navigate(['/semillero']).then(() => {
+          this.newMessage('Semillero eliminado');
+        })
       }
     );
   }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AnimalComponent } from './components/animal/animal.component';
-import { SemilleroComponent } from './components/semilleros/semillero.component';
+import { SemilleroComponent } from './components/semillero/semillero.component';
 import { SignupComponent } from './authentication/signup/signup.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { AppComponent } from './app.component';

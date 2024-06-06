@@ -53,13 +53,13 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="/animal">Inicio</a></li>
-                  <li class="breadcrumb-item active" aria-current="page">Lideres de Semilleros</li>
+                  <li class="breadcrumb-item active" aria-current="page">Semilleros</li>
                 </ol>
               </nav>
               <div class="col-md-12 d-flex justify-content-center">
                 <div class="page-header">
                   <h1>
-                    <small>Lista de Lideres de Semilleros</small>
+                    <small>Semilleros Disponibles</small>
                   </h1>
                 </div>
               </div>
@@ -70,7 +70,7 @@
                 <div class="">
                   <!-- Button trigger modal -->
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    Registrar nuevo lider
+                    Registrar nuevo semillero
                   </button>
                 </div>
                 <!--INICIA TABLA-->
@@ -78,42 +78,56 @@
                   <table class="table table-striped table-sm">
                     <thead>
                       <tr>
-                        <th scope="col">Nombre</th>
-                        <th scope="col">Correo</th>
-                        <th scope="col">Cédula</th>
-                        <th scope="col">Editar</th>
-                        <th scope="col">Eliminar</th>
+                        <th scope="col" class="text-center">Código</th>
+                        <th scope="col" class="text-center">Líder de Semillero</th>
+                        <th scope="col" class="text-center">Nombre del Semillero</th>
+                        <th scope="col" class="text-center">Descripción</th>
+                        <th scope="col" class="text-center">Facultad</th>
+                        <th scope="col" class="text-center">Integrantes</th>
+                        <th scope="col" class="text-center">Editar</th>
+                        <th scope="col" class="text-center">Eliminar</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr *ngFor="let item of animalList">
-                        <td>{{item.nombre}}</td>
-                        <td>{{item.correo}}</td>
-                        <td>{{item.cedula}}</td>
-                        <td><button type="button" class="btn btn-primary" (click)="toggleEditAnimal(item._id)">
+                      <tr *ngFor="let item of semilleroList">
+                        <td class="text-center">{{item.codigo}}</td>
+                        <td class="text-center">{{item.liderSemillero}}</td>
+                        <td class="text-center">{{item.nombreSemillero}}</td>
+                        <td class="text-center">{{item.descripcion}}</td>
+                        <td class="text-center">{{item.facultad}}</td>
+                        <td class="text-center">
+                          <ul>
+                            <li *ngFor="let integrante of item.integrantes">{{integrante.nombre}}</li>
+                          </ul>
+                        </td>
+                        <td class="text-center"><button type="button" class="btn btn-primary" (click)="toggleEditSemillero(item._id)">
                             <i class="bi bi-pencil-square"></i>
                           </button></td>
-                        <td><button type="button" class="btn btn-primary" (click)="deleteAnimalEntry(item._id)">
+                        <td class="text-center"><button type="button" class="btn btn-primary" (click)="deleteSemilleroEntry(item._id)">
                             <i class="bi bi-trash"></i>
                           </button></td>
                       </tr>
                   </table>
                 </div>
                 <!--TERMINA TABLA-->
-                <form *ngIf="editableAnimal" class="card p-2" (ngSubmit)="updateAnimalEntry()" [formGroup]="semilleroForm">
+                <form *ngIf="editableSemillero" class="card p-2" (ngSubmit)="updateSemilleroEntry()" [formGroup]="semilleroForm">
                   <div class="mb-3">
-                    <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"
-                      placeholder="Nombre del animal" formControlName="nombre">
+                    <label for="codigo" class="form-label">Código</label>
+                    <input type="text" class="form-control" id="codigo" aria-describedby="emailHelp"
+                      placeholder="Ingresa el Código del Semillero" formControlName="codigo">
                   </div>
                   <div class="mb-3">
-                    <label for="email" class="form-label">Correo</label>
-                    <input type="email" class="form-control" id="email" placeholder=""
-                      formControlName="correo">
+                    <label for="liderSemillero" class="form-label">Líder de Semillero</label>
+                    <input type="text" class="form-control" id="liderSemillero" placeholder=""
+                      formControlName="liderSemillero">
                   </div>
                   <div class="mb-3">
-                    <label for="cedula" class="form-label">Cédula</label>
-                    <input type="text" class="form-control" id="cedula" placeholder="" formControlName="cedula">
+                    <label for="nombreSemillero" class="form-label">Nombre del Semillero</label>
+                    <input type="text" class="form-control" id="nombreSemillero" placeholder="" formControlName="nombreSemillero">
+                  </div>
+                  <div class="mb-3">
+                    <label for="facultad" class="form-label">Facultad</label>
+                    <input type="text" class="form-control" id="facultad" placeholder="" formControlName="facultad">
                   </div>
                   <div class="input-group justify-content-center md-12">
                     <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
@@ -129,30 +143,35 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Líder</h1>
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Nuevo Semillero</h1>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                  <form class="card p-2" (ngSubmit)="newAnimalEntry()" [formGroup]="semilleroForm">
+                  <form class="card p-2" (ngSubmit)="newSemilleroEntry()" [formGroup]="semilleroForm">
                     <div class="mb-3">
-                      <label for="nombre" class="form-label">Nombre</label>
-                      <input type="text" class="form-control" id="nombre" aria-describedby="emailHelp"
-                        placeholder="Nombre del líder de semillero" formControlName="nombre">
+                      <label for="codigo" class="form-label">Código</label>
+                      <input type="text" class="form-control" id="codigo" aria-describedby="emailHelp"
+                        placeholder="Asigna un código" formControlName="codigo">
                     </div>
                     <div class="mb-3">
-                      <label for="email" class="form-label">Correo</label>
-                      <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
-                        placeholder="example@konradlorenz.edu.co" formControlName="correo">
+                      <label for="liderSemillero" class="form-label">Líder de Semillero</label>
+                      <input type="email" class="form-control" id="liderSemillero" aria-describedby="emailHelp"
+                        placeholder="Ingresa el nombre del líder" formControlName="liderSemillero">
                     </div>
                     <div class="mb-3">
-                      <label for="password" class="form-label">Clave</label>
-                      <input type="password" class="form-control" id="exampleInputPassword"
-                        placeholder="Asigna una contraseña" formControlName="clave">
+                      <label for="nombreSemillero" class="form-label">Nombre del Semillero</label>
+                      <input type="text" class="form-control" id="nombreSemillero"
+                        placeholder="Asigna un nombre al semillero" formControlName="nombreSemillero">
                     </div>
                     <div class="mb-3">
-                      <label for="cedula" class="form-label">Cédula</label>
-                      <input type="text" class="form-control" id="cedula" aria-describedby="emailHelp"
-                        placeholder="110354697" formControlName="cedula">
+                      <label for="descripcion" class="form-label">Descripción</label>
+                      <input type="text" class="form-control" id="descripcion" aria-describedby="emailHelp"
+                        placeholder="Agrega una descripción" formControlName="descripcion">
+                    </div>
+                    <div class="mb-3">
+                      <label for="facultad" class="form-label">Facultad</label>
+                      <input type="text" class="form-control" id="facultad" aria-describedby="emailHelp"
+                        placeholder="Facultad del semillero" formControlName="facultad">
                     </div>
                     <div class="input-group justify-content-center md-12">
                       <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
