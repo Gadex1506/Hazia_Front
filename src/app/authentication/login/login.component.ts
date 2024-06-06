@@ -33,6 +33,7 @@ export class LoginComponent {
           this.router.navigateByUrl('/animal');
         }else if (rol == '2') {
           console.log('Rol de Lider');
+          this.router.navigateByUrl('/liderSemillero');
         }else if (rol == '3') {
           console.log('Rol de Estudiante');
         }

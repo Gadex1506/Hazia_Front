@@ -87,6 +87,7 @@ export class AnimalComponent {
         this.animalForm.setValue({
           nombre: data.nombre,
           correo: data.correo,
+          clave: data.clave,
           cedula: data.cedula,
         });
       }

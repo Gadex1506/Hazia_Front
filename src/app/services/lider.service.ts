@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
-export class AnimalService {
+export class LiderService {
   apiUri = '/api/lideres';
   apiUriRegistro = '/api/registroLider';
   apiUriEliminarL = '/api/eliminarLider';
